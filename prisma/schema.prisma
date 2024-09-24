@@ -1,0 +1,50 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+// Looking for ways to speed up your queries, or scale easily with your serverless or edge functions?
+// Try Prisma Accelerate: https://pris.ly/cli/accelerate-init
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+model Payment {
+  id                  String      @id @default(uuid()) // ID do pagamento no Asaas
+  dateCreated         DateTime    // Data de criação do pagamento
+  customerId          String      // Relaciona com o modelo Customer (ID do cliente)
+  value               Float       // Valor do pagamento
+  billingType         BillingType // Tipo de cobrança (BOLETO, CREDIT_CARD, PIX)
+  status              PaymentStatus // Status do pagamento (CONFIRMED, RECEIVED, etc.)
+  dueDate             DateTime    // Data de vencimento
+  paymentDate         DateTime?   // Data de pagamento (opcional, pois pode ser nulo antes de ser pago)
+  transactionReceiptUrl String?   // URL do comprovante de pagamento (opcional)
+
+  customer            Customer    @relation(fields: [customerId], references: [id]) // Relacionamento com o modelo Customer
+}
+
+model Customer {
+  id        String   @id @default(uuid()) // ID do cliente no Asaas
+  name      String   // Nome do cliente
+  email     String?  // Email do cliente (opcional)
+  cpfCnpj   String   // CPF ou CNPJ do cliente
+
+  payments  Payment[] // Relacionamento com os pagamentos
+}
+
+enum BillingType {
+  BOLETO
+  CREDIT_CARD
+  PIX
+}
+
+enum PaymentStatus {
+  CONFIRMED
+  RECEIVED
+  OVERDUE
+  PENDING
+}
