@@ -1,7 +1,7 @@
 import { Customer } from "../../entities/Customer";
-import prismaClient from "../../prisma";
-
 import { ICustomerRepository } from "../ICustomer";
+
+import prismaClient from "../../prisma";
 
 export class PostgresCustomerRepository implements ICustomerRepository {
     async save(customer : Customer){
@@ -13,7 +13,7 @@ export class PostgresCustomerRepository implements ICustomerRepository {
     }
 
     async findByID(customerID: string): Promise<Customer> {
-        let customer = await prismaClient.customer.findFirst({
+        let customer = await prismaClient.customer.findUnique({
             where: {
                 id : customerID
             }

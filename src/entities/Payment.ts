@@ -1,10 +1,8 @@
-import { BillingType, PaymentStatus } from './enums'; 
-
 export class Payment{
     public id: string;
     public value: number;
-    public billingType: BillingType; // Usa enum para limitar os tipos de cobrança
-    public status: PaymentStatus;    // Usa enum para limitar os status de pagamento
+    public billingType: string;
+    public status: string;
     public dueDate: Date;
     public paymentDate?: Date;
     public transactionReceiptUrl?: string;
