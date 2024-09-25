@@ -54,7 +54,6 @@ export class PostgresPaymentReposiroty implements IPaymentRepository{
                 id : paymentID
             }
         })
-
         return payment
     }
 
