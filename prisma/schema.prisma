@@ -1,36 +1,27 @@
-// This is your Prisma schema file,
-// learn more about it in the docs: https://pris.ly/d/prisma-schema
-
-// Looking for ways to speed up your queries, or scale easily with your serverless or edge functions?
-// Try Prisma Accelerate: https://pris.ly/cli/accelerate-init
-
-datasource db {
-  provider = "sqlite"
-  url      = "file:./dev.db"
-}
-
 generator client {
   provider = "prisma-client-js"
 }
-model Payment {
-  id                  String      @id @default(uuid()) // ID do pagamento no Asaas
-  dateCreated         DateTime    // Data de criação do pagamento
-  customerId          String      // Relaciona com o modelo Customer (ID do cliente)
-  value               Float       // Valor do pagamento
-  billingType         String // Tipo de cobrança (BOLETO, CREDIT_CARD, PIX)
-  status              String // Status do pagamento (CONFIRMED, RECEIVED, etc.)
-  dueDate             DateTime    // Data de vencimento
-  paymentDate         DateTime?   // Data de pagamento (opcional, pois pode ser nulo antes de ser pago)
-  transactionReceiptUrl String?   // URL do comprovante de pagamento (opcional)
 
-  customer            Customer    @relation(fields: [customerId], references: [id]) // Relacionamento com o modelo Customer
+datasource db {
+  provider = "mysql"
+  url      = env("DATABASE_URL")
 }
 
 model Customer {
-  id        String   @id @default(uuid()) // ID do cliente no Asaas
-  name      String   // Nome do cliente
-  email     String?  // Email do cliente (opcional)
-  cpfCnpj   String   // CPF ou CNPJ do cliente
+  id      String  @id @db.VarChar(255)
+  name    String  @db.Text
+  email   String? @db.Text
+  cpfCnpj String? @db.Text
+}
 
-  payments  Payment[] // Relacionamento com os pagamentos
+model Payment {
+  id                    String    @id @db.VarChar(255)
+  value                 Float     @db.Float
+  billingType           String?   @db.Text
+  status                String?   @db.Text
+  dueDate               DateTime? @db.Date
+  paymentDate           DateTime? @db.Date
+  transactionReceiptUrl String?   @db.Text
+  customerId            String?   @db.Text
+  dateCreated           DateTime? @db.Date
 }
