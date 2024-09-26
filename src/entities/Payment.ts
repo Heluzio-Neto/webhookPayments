@@ -3,9 +3,9 @@ export class Payment{
     public value: number;
     public billingType: string;
     public status: string;
-    public dueDate: Date;
+    public dateCreated: Date;
+    public dueDate : Date;
     public paymentDate?: Date;
-    public transactionReceiptUrl?: string;
     public customerId: string;
 
     constructor(props : Payment){

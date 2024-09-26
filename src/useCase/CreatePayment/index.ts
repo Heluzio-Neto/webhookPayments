@@ -1,10 +1,8 @@
 import { CreatePaymentUseCase } from "./CreatePaymentUseCase";
 import { CreatePaymentController } from "./CreatePaymentController";
 import { PostgresPaymentReposiroty } from "../../repositories/implementations/PostgresPaymentRepository";
-import { PostgresCustomerRepository } from "../../repositories/implementations/PostgresCustomerRepository";
 
-const postgresCustomerRepository = new PostgresCustomerRepository()
-const postgresPaymentRepository = new PostgresPaymentReposiroty(postgresCustomerRepository)
+const postgresPaymentRepository = new PostgresPaymentReposiroty()
 
 const createPaymentUseCase = new CreatePaymentUseCase(
     postgresPaymentRepository

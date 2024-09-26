@@ -9,16 +9,26 @@ export class CreatePaymentController {
     async handle(request : Request, response : Response){
         try {
             // Pega o body da requisição
-            const { payment, customer } = request.body;
-
-            console.log(request.body)
+            const { payment } = request.body;
         
             // Valida se os dados de payment e customer existem
-            if (!payment || !customer) {
-              return response.status(400).json({ error: 'Dados de pagamento ou cliente estão ausentes'});
+            if (!payment) {
+              return response.status(400).json({ error: 'Dados de pagamento estão ausentes'});
+            }
+            console.log(payment['id'])
+
+            let pay = {
+              "id": payment['id'], 
+              "value": payment['value'],
+              "billingType": payment['billingType'],
+              "status": payment['status'],
+              "dateCreated": new Date(payment['value']),
+              "dueDate" : new Date(payment['dueDate']),
+              "paymentDate": new Date(payment['paymentDate']),
+              "customerId": payment['customer']
             }
 
-            await this.createPaymentUseCase.execute(customer, payment)
+            await this.createPaymentUseCase.execute(pay)
 
             return response.status(201).json({ success: "Payment created or updated successfully"});
             

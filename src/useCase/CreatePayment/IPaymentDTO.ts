@@ -3,9 +3,8 @@ export interface IPaymentDTO {
     value: number;
     billingType: string;
     status: string;
-    dueDate: Date;
+    dateCreated: Date;
+    dueDate : Date;
     paymentDate?: Date;
-    transactionReceiptUrl?: string;
     customerId: string;
-
 }
