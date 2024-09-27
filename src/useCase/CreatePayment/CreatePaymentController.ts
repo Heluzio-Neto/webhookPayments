@@ -15,7 +15,6 @@ export class CreatePaymentController {
             if (!payment) {
               return response.status(400).json({ error: 'Dados de pagamento estão ausentes'});
             }
-            console.log(payment['id'])
 
             let pay = {
               "id": payment['id'], 
