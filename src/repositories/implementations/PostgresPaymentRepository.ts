@@ -3,7 +3,7 @@ import { IPaymentRepository } from "../IPayment";
 
 import prismaClient from "../../prisma";
 
-export class PostgresPaymentReposiroty implements IPaymentRepository{
+export class PostgresPaymentRepository implements IPaymentRepository{
     async save(payment : Payment){
         let pay = await this.findByID(payment.id)
         if(pay){
@@ -48,6 +48,12 @@ export class PostgresPaymentReposiroty implements IPaymentRepository{
                 status : statusPayment
             }
         })
+
+        return payments
+    }
+
+    async findAll(): Promise<Payment[]> {
+        let payments = await prismaClient.payment.findMany({})
 
         return payments
     }
