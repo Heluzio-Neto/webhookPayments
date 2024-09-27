@@ -22,7 +22,7 @@ export class CreatePaymentController {
               "value": payment['value'],
               "billingType": payment['billingType'],
               "status": payment['status'],
-              "dateCreated": new Date(payment['value']),
+              "dateCreated": new Date(payment['dateCreated']),
               "dueDate" : new Date(payment['dueDate']),
               "paymentDate": new Date(payment['paymentDate']),
               "customerId": payment['customer']
