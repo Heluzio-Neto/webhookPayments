@@ -6,7 +6,7 @@ dotenv.config();
 const VALID_TOKEN = process.env.TOKEN;
 
 export function validateToken(req: Request, res: Response, next: NextFunction) {
-  const token = req.headers['authorization'];
+  const token = req.headers['asaas-access-token'];
   if (!token) {
     return res.status(401).json({ message: 'Token não fornecido' });
   }
