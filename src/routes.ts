@@ -13,4 +13,4 @@ router.get('/payments', validateToken, (request, response) => {
     return getAllPaymentsController.handle(request, response)
 })
 
-export { router }
+export { router } 
