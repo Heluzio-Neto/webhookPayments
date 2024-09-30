@@ -1,5 +1,5 @@
 import { PostgresPaymentRepository } from "../../repositories/implementations/PostgresPaymentRepository"
-import { GetAllPaymentsController } from "./GetAllMetasFrentistasController"
+import { GetAllPaymentsController } from "./GetAllPaymentsController"
 import { GetAllPaymentsUseCase } from "./GetAllPaymentsUseCase"
 
 
