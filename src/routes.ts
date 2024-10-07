@@ -3,6 +3,8 @@ import { validateToken } from "./middleware/Authentication";
 import { createPaymentController } from "./useCase/CreatePayment"
 import { getAllPaymentsController } from "./useCase/GetPayments";
 import { getPaymentsByStatusController } from "./useCase/GetPaymentsByStatus";
+import { getPaymentsByIDController } from "./useCase/GetPaymentByID";
+
 const router = Router()
 
 /* Rotas de Compra de Gás*/
@@ -18,5 +20,8 @@ router.get('/paymentsByStatus/:status', validateToken, (request, response) => {
     return getPaymentsByStatusController.handle(request, response)
 })
 
+router.get('/payments/:id', validateToken, (request, response) => {
+    return getPaymentsByIDController.handle(request, response)
+})
 
 export { router } 
