@@ -1,14 +1,16 @@
 import { Request, Response } from "express";
-import { GetAllPaymentsUseCase } from "./GetAllPaymentsUseCase";
+import { GetPaymentsByIDUseCase } from "./GetPaymentsByIDUseCase";
 
-export class GetAllPaymentsController {
+export class GetPaymentsByIDController {
     constructor(
-        private getAllPaymentsUseCase: GetAllPaymentsUseCase,
+        private getPaymentsByIDUseCase: GetPaymentsByIDUseCase,
     ){}
 
     async handle(request: Request, response: Response): Promise<Response>{
         try{
-            const payments = await this.getAllPaymentsUseCase.execute()
+            const id = request.params.id
+            const payments = await this.getPaymentsByIDUseCase.execute(id)
+
             return response.status(200).json(payments);  
           } catch (err) {
             return response.status(400).json({

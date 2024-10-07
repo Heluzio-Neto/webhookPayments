@@ -39,6 +39,11 @@ export class PostgresPaymentRepository implements IPaymentRepository{
                 id : paymentID
             }
         })
+
+        if(!payment){
+            throw new Error("Pagamento não Cadastrado!!")
+        }
+
         return payment
     }
 
@@ -49,11 +54,19 @@ export class PostgresPaymentRepository implements IPaymentRepository{
             }
         })
 
+        if( payments.length < 1 ){
+            throw new Error("Nenhum Pagamento com esse Status!!")
+        }
+
         return payments
     }
 
     async findAll(): Promise<Payment[]> {
         let payments = await prismaClient.payment.findMany({})
+
+        if( payments.length < 1 ){
+            throw new Error("Nenhum Pagamento Cadastrado!!")
+        }
 
         return payments
     }
