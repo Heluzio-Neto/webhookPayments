@@ -31,6 +31,8 @@ export class PostgresPaymentRepository implements IPaymentRepository{
                 customerId : payment.customerId        
             }
          })
+
+        return
      }
 
     async findByID(paymentID: string): Promise<Payment> {
@@ -41,7 +43,7 @@ export class PostgresPaymentRepository implements IPaymentRepository{
         })
 
         if(!payment){
-            throw new Error("Pagamento não Cadastrado!!")
+            return
         }
 
         return payment

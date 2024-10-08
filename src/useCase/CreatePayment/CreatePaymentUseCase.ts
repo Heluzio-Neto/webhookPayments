@@ -10,7 +10,6 @@ export class CreatePaymentUseCase{
 
     async execute(payment : IPaymentDTO){
             let pay = new Payment(payment)
-
             await this.paymentRepository.save(pay)
     }
 }
