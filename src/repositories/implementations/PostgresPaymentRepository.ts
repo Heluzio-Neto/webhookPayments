@@ -5,6 +5,9 @@ import prismaClient from "../../prisma";
 
 export class PostgresPaymentRepository implements IPaymentRepository{
     async save(payment : Payment){
+
+        console.log(payment)
+
         let pay = await this.findByID(payment.id)
         if(pay){
             await prismaClient.payment.update({
@@ -21,14 +24,7 @@ export class PostgresPaymentRepository implements IPaymentRepository{
         
         await prismaClient.payment.create({
             data : {
-                id: payment.id,
-                dateCreated: payment.dateCreated,
-                value: payment.value,
-                billingType: payment.billingType,
-                status: payment.status, // Pode ser ajustado dinamicamente ou como default
-                dueDate: new Date(payment.dueDate),
-                paymentDate: new Date(payment.paymentDate),   
-                customerId : payment.customerId        
+                ...payment
             }
          })
 
@@ -65,7 +61,6 @@ export class PostgresPaymentRepository implements IPaymentRepository{
 
     async findAll(): Promise<Payment[]> {
         let payments = await prismaClient.payment.findMany({})
-
         if( payments.length < 1 ){
             throw new Error("Nenhum Pagamento Cadastrado!!")
         }

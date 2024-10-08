@@ -8,12 +8,13 @@ datasource db {
 }
 
 model Payment {
-  id          String    @id @db.VarChar(255)
-  value       Float     @db.Float
-  billingType String?   @db.Text
-  status      String?   @db.Text
-  dueDate     DateTime? @db.Date
-  paymentDate DateTime? @db.Date
-  customerId  String?   @db.Text
-  dateCreated DateTime? @db.Date
+  id                String    @id @db.VarChar(255)
+  value             Float     @db.Float
+  billingType       String?   @db.Text
+  status            String?   @db.Text
+  dueDate           DateTime? @db.Date
+  paymentDate       DateTime? @db.Date
+  customerId        String?   @db.Text
+  dateCreated       DateTime? @db.Date
+  externalReference String?   @db.Text
 }

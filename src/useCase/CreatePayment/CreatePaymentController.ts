@@ -24,7 +24,8 @@ export class CreatePaymentController {
               "dateCreated": new Date(payment['dateCreated']),
               "dueDate" : new Date(payment['dueDate']),
               "paymentDate": new Date(payment['paymentDate']),
-              "customerId": payment['customer']
+              "customerId": payment['customer'],
+              "externalReference": payment['externalReference']
             }
 
             await this.createPaymentUseCase.execute(pay)
