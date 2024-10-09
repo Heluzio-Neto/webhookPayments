@@ -6,7 +6,7 @@ import prismaClient from "../../prisma";
 export class PostgresPaymentRepository implements IPaymentRepository{
     async save(payment : Payment){
 
-        let pay = await this.findByID(payment.id)
+        let pay = await prismaClient.payment.findFirst({where: { id: payment.id }})
         if(pay){
             await prismaClient.payment.update({
                 where: {
@@ -37,7 +37,7 @@ export class PostgresPaymentRepository implements IPaymentRepository{
         })
 
         if(!payment){
-            return
+            throw new Error("Pagamento com esse id não cadastrado")
         }
 
         return payment
