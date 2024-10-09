@@ -8,6 +8,7 @@ export class Payment{
     public paymentDate?: Date;
     public customerId: string;
     public externalReference: string;
+    public description: string;
 
     constructor(props : Payment){
         Object.assign(this, props)

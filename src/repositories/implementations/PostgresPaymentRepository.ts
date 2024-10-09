@@ -6,8 +6,6 @@ import prismaClient from "../../prisma";
 export class PostgresPaymentRepository implements IPaymentRepository{
     async save(payment : Payment){
 
-        console.log(payment)
-
         let pay = await this.findByID(payment.id)
         if(pay){
             await prismaClient.payment.update({

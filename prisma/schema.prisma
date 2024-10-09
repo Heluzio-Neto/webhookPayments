@@ -17,4 +17,5 @@ model Payment {
   customerId        String?   @db.Text
   dateCreated       DateTime? @db.Date
   externalReference String?   @db.Text
+  description       String?   @db.Text
 }

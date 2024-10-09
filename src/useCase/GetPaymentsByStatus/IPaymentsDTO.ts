@@ -7,4 +7,6 @@ export interface IPaymentDTO {
     dueDate : Date;
     paymentDate?: Date;
     customerId: string;
+    externalReference: string;
+    description: string;
 }
